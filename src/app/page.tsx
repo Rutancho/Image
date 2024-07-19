@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import {db} from '@/app/db';
 
-export const dynamic = 'force-dynamic'; // 이러면 dynamic으로 바뀐다/. 
+export const dynamic = 'force-dynamic'; // 이러면 dynamic으로 바뀐 다/.
+
 export default async function Home() {
   const snippet = await db.snippet.findMany();
 

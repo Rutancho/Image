@@ -1,6 +1,7 @@
 'use server';
 
 import {db} from '@/app/db';
+import { revalidatePath } from 'next/cache';
 import {redirect} from 'next/navigation';
 
 
@@ -10,6 +11,8 @@ export async function editSnippet(id: number, code: string){
         data: {code}
     });
 
+
+    revalidatePath(`/snippets/${id}`);
 
     redirect(`/snippets/${id}`);
 } 
@@ -28,7 +31,7 @@ export async function createSnippet(
     formState:  {message: string}, 
     formData: FormData
 ) {
-    try{
+    try{ 
 
     //check the user's inputs and make sure they're valid
     const title = formData.get('title') as string;
@@ -56,7 +59,6 @@ export async function createSnippet(
     });
     
     
-
     //throw new Error('Failed to save to database.');
     
 } catch (err: unknown){
